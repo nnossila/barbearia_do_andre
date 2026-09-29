@@ -1,31 +1,56 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'login.dart';
 import 'home.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
 
   @override
-  State<SplashPage> createState() => _SplashPage();
+  State<SplashPage> createState() => _SplashPageState();
 }
 
-class _SplashPage extends State<SplashPage> {
+class _SplashPageState extends State<SplashPage> {
+
   @override
   void initState() {
     super.initState();
-    _navegarParaHome();
+
+    verificarLogin();
   }
 
-  Future<void> _navegarParaHome() async {
-    // tempo para que o splash fique visivel
-    await Future.delayed(const Duration(seconds: 2),);
-    // navegar para a tela principal
-    if (mounted) {
+  Future<void> verificarLogin() async {
+    // Espera a splash aparecer
+    await Future.delayed(
+      const Duration(seconds: 2),
+    );
+
+    final prefs = await SharedPreferences.getInstance();
+
+    final logado = prefs.getBool('logado') ?? false;
+
+    if (!mounted) return;
+
+    if (logado) {
+      // Usuário já fez login
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => HomePage())
+        MaterialPageRoute(
+          builder: (context) => const HomePage(),
+        ),
+      );
+    } else {
+      // Usuário ainda não fez login
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const Login(),
+        ),
       );
     }
   }
+
 
   @override
   Widget build(BuildContext context) {

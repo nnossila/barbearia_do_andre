@@ -16,6 +16,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFF5F1EA),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -83,9 +84,9 @@ class _HomePageState extends State<HomePage> {
                     Text(
                       'Horários agendados:',
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                        color: Color(0xFF171713),
                       ),
                     ),
                     SizedBox(height: 8),
@@ -93,7 +94,7 @@ class _HomePageState extends State<HomePage> {
                       '---',
                       style: TextStyle(
                         fontSize: 16,
-                        color: Colors.black,
+                        color: Color(0xFF171713),
                       ),
                     ),
                   ],
@@ -111,7 +112,7 @@ class _HomePageState extends State<HomePage> {
                 child: ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF222222),
+                    backgroundColor: const Color(0xFF24241F),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16),
                     ),
@@ -121,7 +122,7 @@ class _HomePageState extends State<HomePage> {
                     'Agendar um corte',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 18,
+                      fontSize: 24,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -138,7 +139,7 @@ class _HomePageState extends State<HomePage> {
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black,
+                  color: Color(0xFF171713),
                 ),
               ),
             ),
@@ -229,8 +230,8 @@ class _HomePageState extends State<HomePage> {
             _currentIndex = index;
           });
         },
-        selectedItemColor: const Color(0xFFD35400),
-        unselectedItemColor: Colors.grey,
+        selectedItemColor: const Color(0xFFC96A3D),
+        unselectedItemColor: Color(0xFF77736B),
         backgroundColor: Colors.white,
         type: BottomNavigationBarType.fixed,
         items: const [
