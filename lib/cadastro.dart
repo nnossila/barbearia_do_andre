@@ -60,7 +60,7 @@ class _CadastroState extends State<Cadastro> {
 
       // Cadastra no Supabase
       await supabase.from('clientes').insert({
-        'cliente': nome,
+        'nome': nome,
         'cpf': cpf,
         'senha': senha,
       });
@@ -118,166 +118,163 @@ class _CadastroState extends State<Cadastro> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF1E1E1E),
+      backgroundColor: const Color(0xFFF5F1EA),
 
       body: Center(
-        child: Container(
-          width: 310,
-          height: 690,
-          color: const Color(0xFFF5F1E9),
+        child: SingleChildScrollView(
+          child: Container(
+            width: MediaQuery.of(context).size.width * 0.8,
 
-          child: Center(
-            child: SingleChildScrollView(
-              child: Container(
-                width: 270,
+            padding: const EdgeInsets.all(15),
 
-                padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: Colors.white,
 
-                decoration: BoxDecoration(
-                  color: Colors.white,
+              borderRadius: BorderRadius.circular(18),
 
-                  borderRadius: BorderRadius.circular(18),
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black26,
+                  blurRadius: 12,
+                  offset: Offset(0, 5),
+                ),
+              ],
+            ),
 
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.black26,
-                      blurRadius: 12,
-                      offset: Offset(0, 5),
-                    ),
-                  ],
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+
+                // TÍTULO
+                const Text(
+                  'Faça seu cadastro',
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Lora',
+                  ),
                 ),
 
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
+                const SizedBox(height: 10),
 
-                    // TÍTULO
-                    const Text(
-                      'Faça seu cadastro',
-                      style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Georgia',
-                      ),
-                    ),
+                // LINHA
+                const Divider(
+                  color: Colors.black,
+                  thickness: 1.5,
+                  indent: 5,
+                  endIndent: 5,
+                ),
 
-                    const SizedBox(height: 10),
+                const SizedBox(height: 22),
 
-                    // LINHA
-                    const Divider(
-                      color: Colors.black54,
-                      thickness: 1,
-                    ),
+                // NOME
+                campo(
+                  controller: nomeController,
+                  hint: 'Nome completo',
+                ),
 
-                    const SizedBox(height: 12),
+                const SizedBox(height: 18),
 
-                    // NOME
-                    campo(
-                      controller: nomeController,
-                      hint: 'Nome completo',
-                    ),
+                // CPF
+                campo(
+                  controller: cpfController,
+                  hint: 'CPF',
+                  keyboardType: TextInputType.number,
+                ),
 
-                    const SizedBox(height: 14),
+                const SizedBox(height: 18),
 
-                    // CPF
-                    campo(
-                      controller: cpfController,
-                      hint: 'CPF',
-                      keyboardType: TextInputType.number,
-                    ),
+                // SENHA
+                campo(
+                  controller: senhaController,
+                  hint: 'Senha',
+                  obscureText: true,
+                ),
 
-                    const SizedBox(height: 14),
+                const SizedBox(height: 20),
 
-                    // SENHA
-                    campo(
-                      controller: senhaController,
-                      hint: 'Senha',
-                      obscureText: true,
-                    ),
-
-                    const SizedBox(height: 16),
-
-                    // LINK PARA LOGIN
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Row(
-                        children: [
-                          const Text(
-                            'Já tem um cadastro? ',
-                            style: TextStyle(
-                              fontSize: 10,
-                            ),
-                          ),
-
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      const Login(),
-                                ),
-                              );
-                            },
-
-                            child: const Text(
-                              'Faça seu login',
-                              style: TextStyle(
-                                fontSize: 10,
-                                color: Colors.blue,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-
-                    const SizedBox(height: 8),
-
-                    // BOTÃO CADASTRO
-                    SizedBox(
-                      width: double.infinity,
-                      height: 32,
-
-                      child: ElevatedButton(
-                        onPressed:
-                            carregando
-                                ? null
-                                : fazerCadastro,
-
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              const Color(0xFFD06A3D),
-
-                          foregroundColor: Colors.white,
-
-                          shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.circular(20),
-                          ),
-
-                          elevation: 0,
+                // LINK PARA LOGIN
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Row(
+                    children: [
+                      const Text(
+                        'Já tem um cadastro? ',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Color(0xFF171713)
                         ),
+                      ),
 
-                        child: carregando
-                            ? const SizedBox(
-                                width: 18,
-                                height: 18,
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const Login(),
+                            ),
+                          );
+                        },
 
-                                child:
-                                    CircularProgressIndicator(
-                                  strokeWidth: 2,
-                                  color: Colors.white,
-                                ),
-                              )
-                            : const Text(
-                                'Fazer cadastro',
-                                style: TextStyle(
-                                  fontFamily: 'Georgia',
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
+                        child: const Text(
+                          'Faça seu login',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Color(0xFF0061BC),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 14),
+
+                // BOTÃO CADASTRO
+                SizedBox(
+                  width: double.infinity,
+                  height: 40,
+
+                  child: ElevatedButton(
+                    onPressed:
+                        carregando
+                            ? null
+                            : fazerCadastro,
+
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor:
+                          const Color(0xFFC96A3D),
+
+                      foregroundColor: Colors.white,
+
+                      shape: RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.circular(18),
+                      ),
+
+                      elevation: 0,
+                    ),
+
+                    child: carregando
+                        ? const SizedBox(
+                            width: 18,
+                            height: 18,
+
+                            child:
+                                CircularProgressIndicator(
+                              strokeWidth: 2,
+                              color: Colors.white,
+                            ),
+                          )
+                        : const Text(
+                            'Fazer cadastro',
+                            style: TextStyle(
+                              fontFamily: 'Lora',
+                              fontSize: 20,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
                       ),
                     ),
                   ],
@@ -285,9 +282,8 @@ class _CadastroState extends State<Cadastro> {
               ),
             ),
           ),
-        ),
-      ),
-    );
+        );
+
   }
 
   // CAMPO DE TEXTO
@@ -298,7 +294,7 @@ class _CadastroState extends State<Cadastro> {
     TextInputType? keyboardType,
   }) {
     return SizedBox(
-      height: 28,
+      height: 35,
 
       child: TextField(
         controller: controller,
@@ -308,20 +304,25 @@ class _CadastroState extends State<Cadastro> {
         keyboardType: keyboardType,
 
         style: const TextStyle(
-          fontSize: 11,
+          fontSize: 14,
+          color: Color(0xFF171713),
+          fontWeight: FontWeight.w600,
         ),
 
         decoration: InputDecoration(
           hintText: hint,
 
           hintStyle: const TextStyle(
-            fontSize: 11,
-            color: Colors.black87,
+            fontFamily: 'Lora',
+            fontWeight: FontWeight.w500,
+            fontSize: 14,
+            color: Color(0xFF171713),
           ),
+          
 
           filled: true,
 
-          fillColor: const Color(0xFFE3DED4),
+          fillColor: const Color(0xFFDDD7CD),
 
           contentPadding:
               const EdgeInsets.symmetric(
@@ -333,7 +334,7 @@ class _CadastroState extends State<Cadastro> {
                 BorderRadius.circular(12),
 
             borderSide: const BorderSide(
-              color: Colors.black54,
+              color: Color(0xFF24241F),
             ),
           ),
 
@@ -342,7 +343,7 @@ class _CadastroState extends State<Cadastro> {
                 BorderRadius.circular(12),
 
             borderSide: const BorderSide(
-              color: Colors.black54,
+              color: Color(0xFF24241F),
             ),
           ),
 
