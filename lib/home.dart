@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
+import 'perfil.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -229,6 +230,24 @@ class _HomePageState extends State<HomePage> {
           setState(() {
             _currentIndex = index;
           });
+          
+          // if (index == 1) {
+          //  Navigator.pushReplacement(
+          //     context,
+          //     MaterialPageRoute(
+          //       builder: (context) => const Agendamento(),
+          //     ),
+          //   );
+          // }
+
+          if (index == 2) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const Perfil(),
+              ),
+            );
+          }
         },
         selectedItemColor: const Color(0xFFC96A3D),
         unselectedItemColor: Color(0xFF77736B),
